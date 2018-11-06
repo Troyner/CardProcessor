@@ -1,4 +1,4 @@
-package br.com.hubfintech.CardProcessor.exception;
+package br.com.hubfintech.CardProcessor.exceptions;
 
 /**
  * Exception genérica para tratar os erros

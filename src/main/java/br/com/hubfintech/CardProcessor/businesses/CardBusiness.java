@@ -1,11 +1,11 @@
-package br.com.hubfintech.CardProcessor.business;
+package br.com.hubfintech.CardProcessor.businesses;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.hubfintech.CardProcessor.dto.CardDTO;
-import br.com.hubfintech.CardProcessor.exception.FindException;
-import br.com.hubfintech.CardProcessor.service.CardService;
+import br.com.hubfintech.CardProcessor.dtos.CardDTO;
+import br.com.hubfintech.CardProcessor.exceptions.FindException;
+import br.com.hubfintech.CardProcessor.services.CardService;
 
 /**
  * Classe responsável por ser a implementação de

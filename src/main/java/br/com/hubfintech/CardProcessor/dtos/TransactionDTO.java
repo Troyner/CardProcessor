@@ -1,4 +1,4 @@
-package br.com.hubfintech.CardProcessor.dto;
+package br.com.hubfintech.CardProcessor.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,4 +1,4 @@
-package br.com.hubfintech.CardProcessor.service;
+package br.com.hubfintech.CardProcessor.services;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -7,12 +7,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.hubfintech.CardProcessor.dto.CardDTO;
-import br.com.hubfintech.CardProcessor.dto.TransactionDTO;
-import br.com.hubfintech.CardProcessor.entity.Card;
-import br.com.hubfintech.CardProcessor.entity.Transaction;
-import br.com.hubfintech.CardProcessor.exception.FindException;
-import br.com.hubfintech.CardProcessor.repository.CardRepositoryImpl;
+import br.com.hubfintech.CardProcessor.dtos.CardDTO;
+import br.com.hubfintech.CardProcessor.dtos.TransactionDTO;
+import br.com.hubfintech.CardProcessor.entities.Card;
+import br.com.hubfintech.CardProcessor.entities.Transaction;
+import br.com.hubfintech.CardProcessor.exceptions.FindException;
+import br.com.hubfintech.CardProcessor.exceptions.MergeException;
+import br.com.hubfintech.CardProcessor.exceptions.PersistException;
+import br.com.hubfintech.CardProcessor.repositories.CardRepositoryImpl;
 
 @Service
 public class CardServiceImpl implements CardService {
@@ -27,6 +29,20 @@ public class CardServiceImpl implements CardService {
 		return buildCardDTO(repository.findCardTransactions(cardNumber, transactionsAmount).orElseThrow(() -> new FindException("Card not found")));
 	}
 	
+	@Override
+	public Card findByCardNumber(String cardNumber) throws FindException {
+		return repository.findByCardNumber(cardNumber).orElseThrow(() -> new FindException("Card not found"));
+	}
+	
+//	@Override
+//	public void merge(Card card) throws MergeException {
+//		try {
+//			this.repository.merge(card);
+//		} catch (Exception e) {
+//			throw new MergeException("Error at transaction insert", e);
+//		}
+//	}
+	
 	private CardDTO buildCardDTO(Card card) {
 		return CardDTO.builder()
 				.cardNumber(card.getCardNumber())
@@ -37,15 +53,15 @@ public class CardServiceImpl implements CardService {
 	
 	private List<TransactionDTO> buildListTransactionsDTO(List<Transaction> transactions) {
 		List<TransactionDTO> tranctionsDTOs = new ArrayList<>();
-		transactions.forEach(t -> tranctionsDTOs.add(buildTransactionsDTO(t)));
+		transactions.stream().filter(t -> t.getId().getDate() != null).forEach(t -> tranctionsDTOs.add(buildTransactionsDTO(t)));
 		return tranctionsDTOs;
 	}
 	
 	private TransactionDTO buildTransactionsDTO(Transaction transaction) {
 		return TransactionDTO.builder()
-				.date(formatter.format(transaction.getDate()))
-				.amount(transaction.getAmount().toString())
+				.date(formatter.format(transaction.getId().getDate()))
+				.amount(transaction.getId().getAmount().toString())
 				.build();
 	}
-	
+
 }

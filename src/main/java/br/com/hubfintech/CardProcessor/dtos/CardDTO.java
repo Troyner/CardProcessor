@@ -1,4 +1,4 @@
-package br.com.hubfintech.CardProcessor.dto;
+package br.com.hubfintech.CardProcessor.dtos;
 
 import java.math.BigDecimal;
 import java.util.List;

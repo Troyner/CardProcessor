@@ -1,4 +1,4 @@
-package br.com.hubfintech.CardProcessor.controller;
+package br.com.hubfintech.CardProcessor.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.hubfintech.CardProcessor.business.CardBusiness;
-import br.com.hubfintech.CardProcessor.dto.CardDTO;
-import br.com.hubfintech.CardProcessor.exception.FindException;
+import br.com.hubfintech.CardProcessor.businesses.CardBusiness;
+import br.com.hubfintech.CardProcessor.dtos.CardDTO;
+import br.com.hubfintech.CardProcessor.exceptions.FindException;
 
 /**
  * Classe responsável por ser a implementação dos

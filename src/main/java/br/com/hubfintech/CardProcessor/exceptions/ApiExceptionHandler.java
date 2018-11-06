@@ -1,4 +1,4 @@
-package br.com.hubfintech.CardProcessor.exception;
+package br.com.hubfintech.CardProcessor.exceptions;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

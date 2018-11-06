@@ -1,4 +1,4 @@
-package br.com.hubfintech.CardProcessor.repository;
+package br.com.hubfintech.CardProcessor.repositories;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -21,7 +21,8 @@ public abstract class RepositoryImpl {
 	 * Converte objeto (campo registro retornado pelo BD) para LocalDateTime.
 	 */
 	protected LocalDateTime toLocalDateTime(Object campoDoRegistro) {
-		return (campoDoRegistro == null) ? null : LocalDateTime.parse(campoDoRegistro.toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"));
+		return (campoDoRegistro == null) ? null : LocalDateTime.parse(campoDoRegistro.toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS"));
+//		2018-11-05T22:57:46.286
 	}
 	
 	/**
