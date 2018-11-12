@@ -1,5 +1,6 @@
 package br.com.hubfintech.CardProcessor;
 
+import java.io.PrintWriter;
 import java.net.Socket;
 
 import javax.net.SocketFactory;
@@ -27,13 +28,16 @@ import br.com.hubfintech.CardProcessor.dtos.ResponseTransactionDTO;
 @SpringBootApplication
 public class CardProcessorApplication {
 
+	private static Socket socket = null;
+	
+	
 	@Autowired
 	private TransactionBusiness transactionBusiness;
 	
 	public static void main(String[] args) {
 		try {
 			ConfigurableApplicationContext context = SpringApplication.run(CardProcessorApplication.class, args);
-	        Socket socket = SocketFactory.getDefault().createSocket("localhost", 9999);
+	        socket = SocketFactory.getDefault().createSocket("localhost", 9999);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -65,18 +69,24 @@ public class CardProcessorApplication {
     }
 
     @ServiceActivator(inputChannel = "serviceChannel")
-    public String service(String in) {
+    public void service(String in) {
         try {
+        	ObjectMapper objectMapperResponse = new ObjectMapper();
+        	try {
+        		objectMapperResponse.readValue(in, ResponseTransactionDTO.class);
+        		return;
+        	} catch (Exception e) {
+			}
+        	
         	ObjectMapper objectMapperRequest = new ObjectMapper();
         	RequestTransactionDTO requestTransactionDTO = objectMapperRequest.readValue(in, RequestTransactionDTO.class);
 			ResponseTransactionDTO responseTransactionDTO = transactionBusiness.transact(requestTransactionDTO);
 			
-			ObjectMapper objectMapperResponse = new ObjectMapper();
 			
-			return objectMapperResponse.writeValueAsString(responseTransactionDTO);
+			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+			out.println(objectMapperResponse.writeValueAsString(responseTransactionDTO));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
     }
 }

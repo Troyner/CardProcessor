@@ -19,6 +19,11 @@ public class TransactionServiceImpl implements TransactionService {
 	@Autowired
 	private CardRepositoryImpl cardRepositoryImpl;
 
+	/**
+	 * Merge a transaction insert or updating its fields; 
+	 * @param transaction
+	 * @throws MergeException
+	 */
 	@Transactional
 	@Override
 	public void merge(Transaction transaction) throws MergeException {

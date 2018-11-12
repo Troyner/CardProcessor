@@ -1,5 +1,10 @@
 package br.com.hubfintech.CardProcessor.enums;
 
+/**
+ * Actions of a transaction
+ * @author marcus.martins
+ *
+ */
 public enum Action {
 
 	WITHDRAW("withdraw"), DEPOSIT("deposit");

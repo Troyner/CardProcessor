@@ -11,8 +11,7 @@ import br.com.hubfintech.CardProcessor.dtos.CardDTO;
 import br.com.hubfintech.CardProcessor.exceptions.FindException;
 
 /**
- * Classe responsável por ser a implementação dos
- * métodos que receberão os requests de Card.
+ * Class responsible for being the implementation of the methods that will receive the requests of Card.
  * 
  * @author marcus.martins
  * @since 08/02/2018 
@@ -27,7 +26,7 @@ public class CardController {
     private CardBusiness business;
 
     /**
-     * Métodos responsável por chamar o business para buscar um Card e sua últimas dez Transactions.
+     * Methods responsible for calling the business to fetch a Card and its last ten Transactions.
      * @return ResponseEntity<String>
      * @throws FindException 
      */

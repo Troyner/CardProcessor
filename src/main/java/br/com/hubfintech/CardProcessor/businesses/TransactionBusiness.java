@@ -22,6 +22,10 @@ import br.com.hubfintech.CardProcessor.exceptions.PersistException;
 import br.com.hubfintech.CardProcessor.services.CardService;
 import br.com.hubfintech.CardProcessor.services.TransactionService;
 
+/**
+ * Class responsible for being the business implementation of processes related to Transaction.
+ * @author marcus.martins
+ */
 @Component
 public class TransactionBusiness {
 	
@@ -31,6 +35,13 @@ public class TransactionBusiness {
 	@Autowired
 	private CardService cardService;
 
+	/**
+	 * Realize a transaction (WITHDRAW or DEPOSTI), with rules to validate and change
+	 * card amount. 
+	 * @param requestTransactionDTO
+	 * @return
+	 * @throws PersistException
+	 */
 	public ResponseTransactionDTO transact(RequestTransactionDTO requestTransactionDTO) throws PersistException {
 		
 		ResponseTransactionDTO responseTransactionDTO = new ResponseTransactionDTO();
@@ -63,6 +74,12 @@ public class TransactionBusiness {
 		}
 	}
 	
+	/**
+	 * Update card amount considerign the action.
+	 * @param card
+	 * @param action
+	 * @param value
+	 */
 	private void updateCardAmount(Card card, String action, BigDecimal value) {
 		if (Action.DEPOSIT.getValor().equals(action)) {
 			card.setAvailableAmount(card.getAvailableAmount().add(value));
@@ -88,6 +105,11 @@ public class TransactionBusiness {
 		return new BigDecimal(Double.parseDouble(amount));
 	}
 	
+	/**
+	 * Realize the validations of a transaction.
+	 * @param requestTransactionDTO
+	 * @throws Exception
+	 */
 	private void validateTransaction(RequestTransactionDTO requestTransactionDTO) throws Exception {
 		
 		String amount = null;
@@ -107,6 +129,10 @@ public class TransactionBusiness {
 		}
 	}
 	
+	/**
+	 * Get random number to use for autorization code.
+	 * @return
+	 */
 	private String getRandomNumberString() {
 	    Random rnd = new Random();
 	    int number = rnd.nextInt(999999);

@@ -8,11 +8,8 @@ import br.com.hubfintech.CardProcessor.exceptions.FindException;
 import br.com.hubfintech.CardProcessor.services.CardService;
 
 /**
- * Classe responsável por ser a implementação de
- * negócio dos processos relacionados ao Relatório
- * de Desvio de Comportamento.
+ *Class responsible for being the business implementation of processes related to Card.
  * @author marcus.martins
- * @since 13/03/2018 
  */
 @Component
 public class CardBusiness {
@@ -20,6 +17,12 @@ public class CardBusiness {
 	@Autowired
 	private CardService cardService;
 
+	/**
+	 * Find card and its transactions by card number, delimiting by 10.
+	 * @param cardNumber
+	 * @return CardDTO
+	 * @throws FindException
+	 */
 	public CardDTO findCardTransactions(String cardNumber) throws FindException {
 		try {
 			return this.cardService.findCardTransactions(cardNumber, 10);

@@ -66,11 +66,7 @@ public class TransactionBusinessTest {
 	}
 
 	private RequestTransactionDTO mockRequestTransactionDTO(String action, String cardNumber, String amount) {
-		return RequestTransactionDTO.builder()
-				.action(action)
-				.cardNumber(cardNumber)
-				.amount(amount)
-				.build();
+		return new RequestTransactionDTO(action, cardNumber, amount);
 	}
 	
 }

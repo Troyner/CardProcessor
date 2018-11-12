@@ -14,6 +14,10 @@ public class TransactionRepositoryImpl extends RepositoryImpl implements Transac
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	/**
+	 * Merge a transaction insert or updating its fields; 
+	 * @param transaction
+	 */
 	@Override
 	public void merge(Transaction transaction) {
 		try {

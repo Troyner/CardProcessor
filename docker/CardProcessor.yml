@@ -1,0 +1,11 @@
+version: '3.5'
+
+services:
+
+  cardprocessor:
+    build: ./
+    container_name: cardprocessor
+    hostname: cardprocessor
+    ports:
+      - "9091:9091"
+      - "9999:9999"

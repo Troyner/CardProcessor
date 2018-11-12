@@ -2,11 +2,13 @@ package br.com.hubfintech.CardProcessor.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RequestTransactionDTO {
 
 	@JsonProperty(value="action")

@@ -33,6 +33,12 @@ public class CardRepositoryImpl extends RepositoryImpl implements CardRepository
 												"		WHERE card.cardNumber = :cardNumber " +
 												"	 ORDER BY transaction.id.date DESC ";
 	
+	/**
+	 * Find card and its transactions by card number, delimiting by transaction amount. 
+	 * @param cardNumber
+	 * @param transactionsAmount
+	 * @return Optional<Card>
+	 */
 	@Override
 	public Optional<Card> findCardTransactions(String cardNumber, Integer transactionsAmount) {
 		Query query = entityManager.createQuery(findCardTransactions);
@@ -79,6 +85,11 @@ public class CardRepositoryImpl extends RepositoryImpl implements CardRepository
 											"   FROM Card card " +
 											"  WHERE card.cardNumber = :cardNumber ";
 	
+	/**
+	 * Find a card by card number.
+	 * @param cardNumber
+	 * @return Optional<Card>
+	 */
 	@Override
 	public Optional<Card> findByCardNumber(String cardNumber) {
 		Query query = entityManager.createQuery(findByCardNumber);
@@ -100,17 +111,4 @@ public class CardRepositoryImpl extends RepositoryImpl implements CardRepository
 		return cardOpitional;
 	}
 
-	@Override
-	public void merge(Card card) {
-		Session session = entityManager.unwrap(Session.class);
-
-		session.doWork(conn -> {
-			session.merge(card);
-			session.flush();
-			session.clear();
-		});
-	}
-	
-	
-	
 }
