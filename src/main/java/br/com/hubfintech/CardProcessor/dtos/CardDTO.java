@@ -7,9 +7,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Builder
+@EqualsAndHashCode
 public class CardDTO {
 
 	@JsonProperty(value="cardnumber")

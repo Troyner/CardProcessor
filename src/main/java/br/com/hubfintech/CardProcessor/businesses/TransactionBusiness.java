@@ -1,11 +1,8 @@
 package br.com.hubfintech.CardProcessor.businesses;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.time.LocalDateTime;
-import java.util.Locale;
 import java.util.Random;
 
 import javax.xml.bind.ValidationException;
@@ -110,7 +107,7 @@ public class TransactionBusiness {
 		}
 	}
 	
-	public String getRandomNumberString() {
+	private String getRandomNumberString() {
 	    Random rnd = new Random();
 	    int number = rnd.nextInt(999999);
 	    return String.format("%06d", number);

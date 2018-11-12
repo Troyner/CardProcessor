@@ -12,8 +12,6 @@ import br.com.hubfintech.CardProcessor.dtos.TransactionDTO;
 import br.com.hubfintech.CardProcessor.entities.Card;
 import br.com.hubfintech.CardProcessor.entities.Transaction;
 import br.com.hubfintech.CardProcessor.exceptions.FindException;
-import br.com.hubfintech.CardProcessor.exceptions.MergeException;
-import br.com.hubfintech.CardProcessor.exceptions.PersistException;
 import br.com.hubfintech.CardProcessor.repositories.CardRepositoryImpl;
 
 @Service
@@ -34,15 +32,6 @@ public class CardServiceImpl implements CardService {
 		return repository.findByCardNumber(cardNumber).orElseThrow(() -> new FindException("Card not found"));
 	}
 	
-//	@Override
-//	public void merge(Card card) throws MergeException {
-//		try {
-//			this.repository.merge(card);
-//		} catch (Exception e) {
-//			throw new MergeException("Error at transaction insert", e);
-//		}
-//	}
-	
 	private CardDTO buildCardDTO(Card card) {
 		return CardDTO.builder()
 				.cardNumber(card.getCardNumber())
@@ -60,7 +49,7 @@ public class CardServiceImpl implements CardService {
 	private TransactionDTO buildTransactionsDTO(Transaction transaction) {
 		return TransactionDTO.builder()
 				.date(formatter.format(transaction.getId().getDate()))
-				.amount(transaction.getId().getAmount().toString())
+				.amount(transaction.getId().getAmount())
 				.build();
 	}
 

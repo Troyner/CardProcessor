@@ -64,7 +64,7 @@ public class CardProcessorApplication {
         return new ObjectToStringTransformer();
     }
 
-    @ServiceActivator(inputChannel = "serviceChannel", outputChannel = "xmlChannel")
+    @ServiceActivator(inputChannel = "serviceChannel")
     public String service(String in) {
         try {
         	ObjectMapper objectMapperRequest = new ObjectMapper();
